@@ -10,10 +10,10 @@
     - name: Ensure chrony package is installed
       apt:
         name: chrony
-        state: absent
+        state: present
 
     - name: Start and enable chrony service
       service:
         name: chrony
-        state: stop
+        state: started
         enabled: yes

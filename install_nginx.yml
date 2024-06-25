@@ -1,14 +1,17 @@
-# install_nginx.yml
 ---
-- hosts: webservers
+- name: Install Nginx and start it
+  hosts: webservers
   become: yes
-
   tasks:
-    - name: Update apt cache
-      ansible.builtin.apt:
-        update_cache: yes
-
     - name: Install Nginx
-      ansible.builtin.apt:
+      apt:
         name: nginx
         state: present
+        update_cache: yes
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
