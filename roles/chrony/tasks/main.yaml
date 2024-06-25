@@ -1,19 +1,12 @@
 ---
 - name: Install chrony package on Ubuntu nodes
-  hosts: webservers
-  become: yes
-  tasks:
-    - name: Update apt cache
-      apt:
-        update_cache: yes
+  apt:
+    name: chrony
+    state: present
+  when: ansible_os_family == "Ubuntu"
 
-    - name: Ensure chrony package is installed
-      apt:
-        name: chrony
-        state: present
-
-    - name: Start and enable chrony service
-      service:
-        name: chrony
-        state: started
-        enabled: yes
+- name: Start and enable chrony service
+  service:
+    name: chrony
+    state: started
+    enabled: yes
