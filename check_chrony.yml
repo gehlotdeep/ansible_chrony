@@ -1,6 +1,6 @@
 ---
 - name: Check if chrony package is installed
-  hosts: ubuntu_nodes
+  hosts: webservers
   become: yes
   tasks:
     - name: Gather installed package facts

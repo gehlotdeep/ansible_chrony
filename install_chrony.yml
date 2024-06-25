@@ -1,6 +1,6 @@
 ---
 - name: Install chrony package on Ubuntu nodes
-  hosts: ubuntu_nodes
+  hosts: servers_3
   become: yes
   tasks:
     - name: Update apt cache

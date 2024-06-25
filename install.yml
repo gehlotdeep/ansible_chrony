@@ -1,6 +1,6 @@
 # install_chrony.yml
 ---
-- hosts: all
+- hosts: ubuntu_nodes
   become: yes
   roles:
     - chrony
