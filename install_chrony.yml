@@ -1,0 +1,19 @@
+---
+- name: Install chrony package on Ubuntu nodes
+  hosts: ubuntu_nodes
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Ensure chrony package is installed
+      apt:
+        name: chrony
+        state: absent
+
+    - name: Start and enable chrony service
+      service:
+        name: chrony
+        state: stop
+        enabled: yes

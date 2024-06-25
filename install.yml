@@ -1,0 +1,6 @@
+# install_chrony.yml
+---
+- hosts: all
+  become: yes
+  roles:
+    - chrony
