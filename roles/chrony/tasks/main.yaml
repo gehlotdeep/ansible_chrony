@@ -1,11 +1,19 @@
 ---
-    - name: Configure chrony
-      ansible.builtin.lineinfile:
-        path: /etc/chrony/chrony.conf
-        regex: "{{ item.regex }}"
-        line: "{{ item.line }}"
-      loop:
-        - { regex: '^server', line: 'server 0.pool.ntp.org iburst' }  # Adding an NTP server
-        - { regex: '^allow', line: 'allow 192.168.1.0/24' }           # Configuring allowed networks
-        - { regex: '^logfile', line: '/var/log/chrony/chrony.log' }   # Setting a custom log file
-      notify: Restart chrony
+- name: Install chrony package on Ubuntu nodes
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Ensure chrony package is installed
+      apt:
+        name: chrony
+        state: present
+
+    - name: Start and enable chrony service
+      service:
+        name: chrony
+        state: started
+        enabled: yes
